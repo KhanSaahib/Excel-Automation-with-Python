@@ -1,8 +1,16 @@
+"""
+Project Title: Excel Automation with python
+Author: Saddam Khan Ashna
+This project performes data analysis on a simple excel data sheet using openpyxl python library.
+"""
+
 import openpyxl as open
+
 
 inv_file = open.load_workbook("inventory.xlsx")
 prod_table = inv_file["Sheet1"]
 
+#Dictionaries to store the data
 prod_per_suplier = {}
 total_inv_of_suplier= {}
 less_inv_prod = {}
@@ -15,7 +23,7 @@ for row in range(2, prod_table.max_row+1):
     inventory_price = prod_table.cell(row, 5)
 
 
-    """ Calculating number of product per supliers"""
+    #Calculating number of product per supliers
     if suplier_name not in prod_per_suplier:
         prod_per_suplier[suplier_name] = 1
     else:
@@ -41,4 +49,6 @@ for row in range(2, prod_table.max_row+1):
 print(prod_per_suplier)
 print(total_inv_of_suplier)
 print(less_inv_prod)
+
+#Saving the data into a new excel file
 inv_file.save("invetory_updated.xlsx")
